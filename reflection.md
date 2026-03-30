@@ -5,7 +5,15 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
+
+The design has four classes connected in a hierarchy: Owner contains Pets, and each Pet contains Tasks. Scheduler is a separate class that takes an Owner and queries through this hierarchy to return a filtered list of (Pet, Task) pairs.
+
 - What classes did you include, and what responsibilities did you assign to each?
+The design includes four classes, each with a distinct responsibility:
+Task is responsible for representing a single to-do item — it holds the name, scheduled time, and completion status, and owns the logic to mark itself done via mark_done().
+Pet is responsible for managing a collection of tasks belonging to a specific pet — it stores the pet's name and its task list, and controls membership through add_task() and remove_task().
+Owner is responsible for managing a collection of pets — it stores the owner's name and their pet list, and controls membership through add_pet() and remove_pet().
+Scheduler is responsible for querying and filtering the schedule — it takes an Owner as input and uses get_schedule(date_filter, include_done) to traverse the Owner → Pet → Task hierarchy, returning a filtered list of (Pet, Task) pairs.
 
 **b. Design changes**
 
